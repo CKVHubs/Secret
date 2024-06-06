@@ -1,2 +1,1355 @@
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))() local Window = redzlib:MakeWindow({ Title = "CKVHUB : Reborn a Sword 4.0.89🇵🇸", SubTitle = "by CKVScripter thank you so much for used it", SaveFolder = "testando | redz lib v5.lua" }) local Tab1 = Window:MakeTab({"Farm", "home"}) local Tab2 = Window:MakeTab({"Hatcher", "egg"}) local Tab5 = Window:MakeTab({"Auto Training", "earth"}) local Tab6 = Window:MakeTab({"Tower", "swords"}) local Tab3 = Window:MakeTab({"Player Stats", "user"}) local Tab4 = Window:MakeTab({"Settings", "Settings"}) Window:SelectTab(Tab1) local Section = Tab1:AddSection({"Farm & More"}) local Paragraph = Tab1:AddParagraph({"UPDATED 4.0.89", " Added Hatcher, Added Player Stats, Remove Lag"}) local Section = Tab2:AddSection({"Hatcher 1.0.0BETA"}) local Paragraph = Tab2:AddParagraph({"Sorry but not there auto delete right now"}) local Section = Tab3:AddSection({"Player Stats 1.0.0BETA"}) local Paragraph = Tab3:AddParagraph({"Cheat for yourself to help!"}) local Section = Tab4:AddSection({"Settings"}) local Paragraph = Tab4:AddParagraph({"Options for remove lag"}) local Section = Tab5:AddSection({"Thank you so much for used it"}) local Paragraph = Tab5:AddParagraph({"i hope you enjoy :)"}) local Section = Tab6:AddSection({"Auto Complete Tower"}) local Paragraph = Tab6:AddParagraph({"Please wait cooldown dont click fast"}) local Button = Tab4:AddButton({"Remove Textures", function() local Dialog = Window:Dialog({ Title = "Warning", Text = "Are you sure want remove textures :)?", Options = { {"Confirm", function() for i,v in next, (workspace:GetDescendants()) do if v:IsA("Part") then v.Material = Enum.Material.SmoothPlastic end end end}, {"Cancel", function() end} } }) end}) local Button = Tab4:AddButton({"Remove Players", function() local Dialog = Window:Dialog({ Title = "Warning", Text = "Are you sure want hide Players :)?", Options = { {"Confirm", function() -- Get all players in the game local players = game:GetService("Players"):GetPlayers() -- Get the player's character local myCharacter = game.Players.LocalPlayer.Character -- Loop through all players and delete their characters for _, player in ipairs(players) do if player.Character ~= myCharacter then player.Character:Destroy() end end end}, {"Cancel", function() end} } }) end}) local Button = Tab4:AddButton({"Hide AnyThing", function() local Dialog = Window:Dialog({ Title = "Warning", Text = "Are you sure want hide anything :)?", Options = { {"Confirm", function() for _, part in pairs(workspace:GetDescendants()) do if part:IsA("BasePart") then part.Transparency = 1 end end end}, {"Unhide", function() for _, part in pairs(workspace:GetDescendants()) do if part:IsA("BasePart") then part.Transparency = 0 end end end}, {"Cancel", function() end} } }) end}) Tab3:AddSlider({ Name = "WalkSpeed Fast", Min = 16, Max = 125, Increase = 1, Default = 16, Callback = function(Value) local player = game.Players.LocalPlayer local character = player.Character or player.CharacterAdded:Wait() local humanoid = character:WaitForChild("Humanoid") humanoid.WalkSpeed = (Value) end }) local Button = Tab3:AddButton({"Infinite Jump", function() local InfiniteJumpEnabled = true game:GetService("UserInputService").JumpRequest:connect(function() if InfiniteJumpEnabled then game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping") end end) end}) local Button = Tab3:AddButton({"Dont get kick after 20 minutes(antiafk)", function() for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do v:Disable() end end}) local Section = Tab4:AddSection({"Themes"}) local Paragraph = Tab4:AddParagraph({"Only this right now"}) local Button = Tab1:AddButton({ Name = "Open / Close", Description = "Makes the Toggles Invisible" }) local Button3 = Tab6:AddButton({ Name = "Open / Close", Description = "Makes the Toggles Invisible" }) local Toggle1 = Tab1:AddToggle({ Name = "🌊Instant Last Wave🌊", Description = " WARNING Please wait cooldown don't click fast⚠️", Default = false }) local Toggle2 = Tab1:AddToggle({ Name = "🧟‍♂️Auto kill mobs🧟‍♀️", Description = " WARNING Please don't touch its automatically⚠️", Default = false }) local Toggle3 = Tab1:AddToggle({ Name = "🛡Freeze mobs🛡", Description = " ALL GOOD Not there bugs✅", Default = false }) local Section = Tab1:AddSection({"👺Auto kill boss👺"}) local Paragraph = Tab1:AddParagraph({"Warning", " Please wait 10 seconds after press any button"}) local Button2 = Tab1:AddButton({ Name = "Open / Close", Description = "Makes the Toggles Invisible" }) local Toggle4 = Tab1:AddToggle({ Name = "Instant Fight Demon(NoCooldown)", Description = " WARNING Please wait cooldown don't click fast⚠️", Default = false }) local Toggle5 = Tab1:AddToggle({ Name = "Instant Fight Naruto(NoCooldown)", Description = " WARNING Please wait cooldown don't click fast⚠️", Default = false }) local Toggle6 = Tab1:AddToggle({ Name = "Instant Fight Luffy(NoCooldown)", Description = " WARNING Please wait cooldown don't click fast⚠️", Default = false }) local Toggle7 = Tab1:AddToggle({ Name = "Instant Fight Tanjior(NoCooldown)", Description = " WARNING Please wait cooldown don't click fast⚠️", Default = false }) local Toggle8 = Tab1:AddToggle({ Name = "👺Auto kill boss👺", Description = " WARNING Please wait cooldown don't click fast⚠️", Default = false }) local Toggle9 = Tab6:AddToggle({ Name = "🚪Auto next floor🚪", Description = " WARNING Please wait cooldown don't click fast⚠️", Default = false }) local Toggle10 = Tab6:AddToggle({ Name = "👾Auto kill monster👾", Description = " WARNING Please wait cooldown don't click fast⚠️", Default = false }) Button:Callback(Toggle1.Visible) Button:Callback(Toggle2.Visible) Button:Callback(Toggle3.Visible) Button2:Callback(Toggle4.Visible) Button2:Callback(Toggle5.Visible) Button2:Callback(Toggle6.Visible) Button2:Callback(Toggle7.Visible) Button2:Callback(Toggle8.Visible) Button3:Callback(Toggle9.Visible) Button3:Callback(Toggle10.Visible) Toggle1:Callback(function(state1) Toggle1:Set(false) getfenv().autotest1 = (state1 and true or false) while getfenv().autotest1 do Toggle3:Set(true) Toggle4:Set(false) Toggle5:Set(false) Toggle6:Set(false) Toggle7:Set(false) Toggle8:Set(false) local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs") if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty wait(3) Toggle2:Set(false) wait(1) game:GetService("ReplicatedStorage").Events.Fight.Re_ChallengeStart:FireServer(1) wait(3) game:GetService("ReplicatedStorage").Events.Fight.Re_ChallengeStart:FireServer(7) wait(0.5) Toggle2:Set(true) end wait(1) end end) Toggle2:Callback(function(state2) Toggle2:Set(false) getfenv().autotest2 = (state2 and true or false) while getfenv().autotest2 do Toggle3:Set(true) Toggle4:Set(false) Toggle5:Set(false) Toggle6:Set(false) Toggle7:Set(false) local npc = game.Workspace.FightNpcs:GetChildren()[1] if npc then local npcName = npc.Name local args = { [1] = npcName, [2] = 1, } game:GetService("ReplicatedStorage").Events.Fight.Re_TakeDamage:FireServer(unpack(args)) end wait(1) end end) Toggle3:Callback(function(state3) Toggle3:Set(false) getfenv().autotest3 = (state3 and true or false) while getfenv().autotest3 do local fightNpcsFolder = workspace:FindFirstChild("FightNpcs") if fightNpcsFolder then for _, child in pairs(fightNpcsFolder:GetChildren()) do local statusObject = child:FindFirstChild("AttackTime") if statusObject then statusObject.Value = 900000000000 -- Set the AttackTime value to 900000 end end end wait(1) end end) Toggle4:Callback(function(state4) Toggle4:Set(false) getfenv().autotest4 = (state4 and true or false) while getfenv().autotest4 do Toggle1:Set(false) Toggle2:Set(false) Toggle3:Set(true) Toggle5:Set(false) Toggle6:Set(false) Toggle7:Set(false) local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs") if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty wait(6) game:GetService("ReplicatedStorage").Events.Relics.Re_Start:FireServer("SecretBoss004") Toggle8:Set(true) end wait(1) end end) Toggle5:Callback(function(state5) Toggle5:Set(false) getfenv().autotest5 = (state5 and true or false) while getfenv().autotest5 do Toggle1:Set(false) Toggle2:Set(false) Toggle3:Set(true) Toggle4:Set(false) Toggle6:Set(false) Toggle7:Set(false) local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs") if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty wait(6) game:GetService("ReplicatedStorage").Events.Relics.Re_Start:FireServer("SecretBoss003") Toggle8:Set(true) end wait(1) end end) Toggle6:Callback(function(state6) Toggle6:Set(false) getfenv().autotest6 = (state6 and true or false) while getfenv().autotest6 do Toggle1:Set(false) Toggle2:Set(false) Toggle3:Set(true) Toggle5:Set(false) Toggle4:Set(false) Toggle7:Set(false) local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs") if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty wait(6) game:GetService("ReplicatedStorage").Events.Relics.Re_Start:FireServer("SecretBoss002") Toggle8:Set(true) end wait(1) end end) Toggle7:Callback(function(state7) Toggle7:Set(false) getfenv().autotest7 = (state7 and true or false) while getfenv().autotest7 do Toggle1:Set(false) Toggle2:Set(false) Toggle3:Set(true) Toggle4:Set(false) Toggle5:Set(false) Toggle6:Set(false) local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs") if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty wait(6) game:GetService("ReplicatedStorage").Events.Relics.Re_Start:FireServer("SecretBoss001") Toggle8:Set(true) end wait(1) end end) Toggle8:Callback(function(state8) Toggle8:Set(false) getfenv().autotest8 = (state8 and true or false) while getfenv().autotest8 do Toggle1:Set(false) Toggle2:Set(false) Toggle3:Set(true) game:GetService("ReplicatedStorage").Events.Relics.Re_TakeDamage:FireServer(3) wait(1) end end) Toggle9:Callback(function(state9) Toggle9:Set(false) getfenv().autotest9 = (state9 and true or false) while getfenv().autotest9 do Toggle1:Set(false) Toggle2:Set(false) Toggle3:Set(true) Toggle4:Set(false) Toggle5:Set(false) Toggle6:Set(false) Toggle7:Set(false) Toggle8:Set(false) Toggle10:Set(false) local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs") if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty wait(6) game:GetService("ReplicatedStorage").Events.Tower.Re_Challenge:FireServer(true) Toggle10:Set(true) end wait(1) end end) Toggle10:Callback(function(state10) Toggle10:Set(false) getfenv().autotest10 = (state10 and true or false) while getfenv().autotest10 do game:GetService("ReplicatedStorage").Events.Tower.Re_TakeDamage:FireServer(3) wait(1) end end) local Dropdown = Tab2:AddDropdown({ Name = "🐣Hatcher World 1🐣", Description = "Select the Number", Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Hatch 3 Egg", "Hatch 4 Egg", "Stop Hatch"}, Default = "Stop Hatch", Flag = "dropdown teste", Callback = function(Value) if Value == "Hatch 1 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw001", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 2 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw002", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 3 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw003", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 4 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw004", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end end }) -- local link = "test" setclipboard(link) local Dropdown = Tab2:AddDropdown({ Name = "🐣Hatcher World 2🐣", Description = "Select the Number", Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Hatch 3 Egg", "Hatch 4 Egg", "Stop Hatch"}, Default = "Stop Hatch", Flag = "dropdown teste", Callback = function(Value) if Value == "Hatch 1 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw005", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 2 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw006", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 3 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw007", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 4 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw008", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end end }) local Dropdown = Tab2:AddDropdown({ Name = "🐣Hatcher World 3🐣", Description = "Select the Number", Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Hatch 3 Egg", "Hatch 4 Egg", "Stop Hatch"}, Default = "Stop Hatch", Flag = "dropdown teste", Callback = function(Value) if Value == "Hatch 1 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw009", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 2 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw010", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 3 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw011", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 4 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw012", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end end }) local Dropdown = Tab2:AddDropdown({ Name = "🐣Hatcher World 4🐣", Description = "Select the Number", Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Hatch 3 Egg", "Hatch 4 Egg", "Stop Hatch"}, Default = "Stop Hatch", Flag = "dropdown teste", Callback = function(Value) if Value == "Hatch 1 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw013", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 2 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw014", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 3 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw015", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 4 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw016", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end end }) local Dropdown = Tab2:AddDropdown({ Name = "🐣Hatcher World 5🐣", Description = "Select the Number", Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Hatch 3 Egg", "Hatch 4 Egg", "Stop Hatch"}, Default = "Stop Hatch", Flag = "dropdown teste", Callback = function(Value) if Value == "Hatch 1 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw017", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 2 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw018", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 3 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw019", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 4 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw020", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end end }) local Dropdown = Tab2:AddDropdown({ Name = "🐣Hatcher World 6🐣", Description = "Select the Number", Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Stop Hatch"}, Default = "Stop Hatch", Flag = "dropdown teste", Callback = function(Value) if Value == "Hatch 1 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw021", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end if Value == "Hatch 2 Egg" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw022", {}) wait(1) end else if Value == "Stop Hatch" then getfenv().Hatch = false end end end }) local Dropdown = Tab5:AddDropdown({ Name = "💪Auto Training World 1💪", Description = "Select the Number", Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"}, Default = "Stop Training", Flag = "dropdown teste", Callback = function(Value) if Value == "Npc 1" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower001") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 2" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower002") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 3" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower003") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 4" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower004") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 5" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower005") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 6" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower006") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "VIP Npc 7" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower007") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end end }) local Dropdown = Tab5:AddDropdown({ Name = "💪Auto Training World 2💪", Description = "Select the Number", Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"}, Default = "Stop Training", Flag = "dropdown teste", Callback = function(Value) if Value == "Npc 1" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower008") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 2" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower009") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 3" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower010") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 4" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower011") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 5" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower012") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 6" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower013") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "VIP Npc 7" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower014") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end end }) local Dropdown = Tab5:AddDropdown({ Name = "💪Auto Training World 3💪", Description = "Select the Number", Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"}, Default = "Stop Training", Flag = "dropdown teste", Callback = function(Value) if Value == "Npc 1" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower015") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 2" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower016") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 3" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower017") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 4" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower018") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 5" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower019") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 6" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower020") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "VIP Npc 7" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower021") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end end }) local Dropdown = Tab5:AddDropdown({ Name = "💪Auto Training World 4💪", Description = "Select the Number", Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"}, Default = "Stop Training", Flag = "dropdown teste", Callback = function(Value) if Value == "Npc 1" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower022") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 2" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower023") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 3" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower024") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 4" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower025") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 5" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower026") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 6" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower027") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "VIP Npc 7" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower028") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end end }) local Dropdown = Tab5:AddDropdown({ Name = "💪Auto Training World 5💪", Description = "Select the Number", Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"}, Default = "Stop Training", Flag = "dropdown teste", Callback = function(Value) if Value == "Npc 1" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower029") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 2" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower030") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 3" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower031") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 4" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower032") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 5" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower033") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 6" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower034") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "VIP Npc 7" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower035") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end end }) local Dropdown = Tab5:AddDropdown({ Name = "💪Auto Training World 6💪", Description = "Select the Number", Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"}, Default = "Stop Training", Flag = "dropdown teste", Callback = function(Value) if Value == "Npc 1" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower036") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 2" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower037") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 3" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower038") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 4" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower039") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 5" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower040") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 6" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower041") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "VIP Npc 7" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower042") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end end }) local Dropdown = Tab5:AddDropdown({ Name = "💪Auto Training World 7💪", Description = "Select the Number", Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"}, Default = "Stop Training", Flag = "dropdown teste", Callback = function(Value) if Value == "Npc 1" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower043") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 2" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower044") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 3" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower045") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 4" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower046") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 5" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower047") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "Npc 6" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower048") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end if Value == "VIP Npc 7" then getfenv().Hatch = (true or false) while getfenv().Hatch do game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower049") wait(1) end else if Value == "Stop Training" then getfenv().Hatch = false end end end })
+local Window = redzlib:MakeWindow({
+  Title = "CKVHUB : Reborn a Sword 4.0.89🇵🇸",
+  SubTitle = "by CKVScripter thank you so much for used it",
+  SaveFolder = "testando | redz lib v5.lua"
+})
+local Tab1 = Window:MakeTab({"Farm", "home"})
+local Tab2 = Window:MakeTab({"Hatcher", "egg"})
+local Tab5 = Window:MakeTab({"Auto Training", "earth"})
+local Tab6 = Window:MakeTab({"Tower", "swords"})
+local Tab3 = Window:MakeTab({"Player Stats", "user"})
+local Tab4 = Window:MakeTab({"Settings", "Settings"})
+
+Window:SelectTab(Tab1)
+local Section = Tab1:AddSection({"Farm & More"})
+local Paragraph = Tab1:AddParagraph({"UPDATED 4.0.89", " Added Hatcher, Added Player Stats, Remove Lag"})
+local Section = Tab2:AddSection({"Hatcher 1.0.0BETA"})
+local Paragraph = Tab2:AddParagraph({"Sorry but not there auto delete right now"})
+local Section = Tab3:AddSection({"Player Stats 1.0.0BETA"})
+local Paragraph = Tab3:AddParagraph({"Cheat for yourself to help!"})
+local Section = Tab4:AddSection({"Settings"})
+local Paragraph = Tab4:AddParagraph({"Options for remove lag"})
+local Section = Tab5:AddSection({"Thank you so much for used it"})
+local Paragraph = Tab5:AddParagraph({"i hope you enjoy :)"})
+local Section = Tab6:AddSection({"Auto Complete Tower"})
+local Paragraph = Tab6:AddParagraph({"Please wait cooldown dont click fast"})
+
+local Button = Tab4:AddButton({"Remove Textures", function()
+  local Dialog = Window:Dialog({
+    Title = "Warning",
+    Text = "Are you sure want remove textures :)?",
+    Options = {
+      {"Confirm", function()
+        for i,v in next, (workspace:GetDescendants()) do
+ if v:IsA("Part") then v.Material = Enum.Material.SmoothPlastic
+ end
+ end
+      end},
+     
+      {"Cancel", function()
+        
+      end}
+    }
+  })
+end})
+
+local Button = Tab4:AddButton({"Remove Players", function()
+  local Dialog = Window:Dialog({
+    Title = "Warning",
+    Text = "Are you sure want hide Players :)?",
+    Options = {
+      {"Confirm", function()
+        -- Get all players in the game
+local players = game:GetService("Players"):GetPlayers()
+
+-- Get the player's character
+local myCharacter = game.Players.LocalPlayer.Character
+
+-- Loop through all players and delete their characters
+for _, player in ipairs(players) do
+    if player.Character ~= myCharacter then
+        player.Character:Destroy()
+    end
+end
+      end},
+     
+      {"Cancel", function()
+        
+      end}
+    }
+  })
+end})
+
+local Button = Tab4:AddButton({"Hide AnyThing", function()
+  local Dialog = Window:Dialog({
+    Title = "Warning",
+    Text = "Are you sure want hide anything :)?",
+    Options = {
+      {"Confirm", function()
+        for _, part in pairs(workspace:GetDescendants()) do
+    if part:IsA("BasePart") then
+        part.Transparency = 1
+    end
+end
+      end},
+     
+     {"Unhide", function()
+        for _, part in pairs(workspace:GetDescendants()) do
+    if part:IsA("BasePart") then
+        part.Transparency = 0
+    end
+end
+      end},
+     
+      {"Cancel", function()
+        
+      end}
+    }
+  })
+end})
+
+Tab3:AddSlider({
+  Name = "WalkSpeed Fast",
+  Min = 16,
+  Max = 125,
+  Increase = 1,
+  Default = 16,
+  Callback = function(Value)
+    local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+humanoid.WalkSpeed = (Value)
+
+  end
+})
+
+local Button = Tab3:AddButton({"Infinite Jump", function()
+        local InfiniteJumpEnabled = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+if InfiniteJumpEnabled then
+game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+end
+end)
+end})
+
+local Button = Tab3:AddButton({"Dont get kick after 20 minutes(antiafk)", function()
+  for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+    v:Disable()
+end
+end})
+
+local Section = Tab4:AddSection({"Themes"})
+local Paragraph = Tab4:AddParagraph({"Only this right now"})
+
+local Button = Tab1:AddButton({
+  Name = "Open / Close",
+  Description = "Makes the Toggles Invisible"
+})
+
+local Button3 = Tab6:AddButton({
+  Name = "Open / Close",
+  Description = "Makes the Toggles Invisible"
+})
+
+local Toggle1 = Tab1:AddToggle({
+  Name = "🌊Instant Last Wave🌊",
+  Description = " <font color='rgb(255,0,0)'>WARNING</font> Please wait cooldown don't click fast⚠️",
+  Default = false
+})
+
+local Toggle2 = Tab1:AddToggle({
+  Name = "🧟‍♂️Auto kill mobs🧟‍♀️",
+  Description = " <font color='rgb(255,0,0)'>WARNING</font> Please don't touch its automatically⚠️",
+  Default = false
+})
+
+local Toggle3 = Tab1:AddToggle({
+  Name = "🛡Freeze mobs🛡",
+  Description = " <font color='rgb(0,255,0)'>ALL GOOD</font> Not there bugs✅",
+  Default = false
+})
+
+local Section = Tab1:AddSection({"👺Auto kill boss👺"})
+local Paragraph = Tab1:AddParagraph({"Warning", " Please wait 10 seconds after press any button"})
+
+local Button2 = Tab1:AddButton({
+  Name = "Open / Close",
+  Description = "Makes the Toggles Invisible"
+})
+
+
+local Toggle4 = Tab1:AddToggle({
+  Name = "Instant Fight Demon(NoCooldown)",
+  Description = " <font color='rgb(255,0,0)'>WARNING</font> Please wait cooldown don't click fast⚠️",
+  Default = false
+})
+
+local Toggle5 = Tab1:AddToggle({
+  Name = "Instant Fight Naruto(NoCooldown)",
+  Description = " <font color='rgb(255,0,0)'>WARNING</font> Please wait cooldown don't click fast⚠️",
+  Default = false
+})
+
+local Toggle6 = Tab1:AddToggle({
+  Name = "Instant Fight Luffy(NoCooldown)",
+Description = " <font color='rgb(255,0,0)'>WARNING</font> Please wait cooldown don't click fast⚠️",
+  Default = false
+})
+
+local Toggle7 = Tab1:AddToggle({
+  Name = "Instant Fight Tanjior(NoCooldown)",
+Description = " <font color='rgb(255,0,0)'>WARNING</font> Please wait cooldown don't click fast⚠️",
+  Default = false
+})
+
+local Toggle8 = Tab1:AddToggle({
+  Name = "👺Auto kill boss👺",
+Description = " <font color='rgb(255,0,0)'>WARNING</font> Please wait cooldown don't click fast⚠️",
+  Default = false
+})
+
+local Toggle9 = Tab6:AddToggle({
+  Name = "🚪Auto next floor🚪",
+  Description = " <font color='rgb(255,0,0)'>WARNING</font> Please wait cooldown don't click fast⚠️",
+  Default = false
+})
+
+local Toggle10 = Tab6:AddToggle({
+  Name = "👾Auto kill monster👾",
+  Description = " <font color='rgb(255,0,0)'>WARNING</font> Please wait cooldown don't click fast⚠️",
+  Default = false
+})
+
+Button:Callback(Toggle1.Visible)
+Button:Callback(Toggle2.Visible)
+Button:Callback(Toggle3.Visible)
+Button2:Callback(Toggle4.Visible)
+Button2:Callback(Toggle5.Visible)
+Button2:Callback(Toggle6.Visible)
+Button2:Callback(Toggle7.Visible)
+Button2:Callback(Toggle8.Visible)
+Button3:Callback(Toggle9.Visible)
+Button3:Callback(Toggle10.Visible)
+
+Toggle1:Callback(function(state1)
+  Toggle1:Set(false)
+  getfenv().autotest1 = (state1 and true or false)
+    while getfenv().autotest1 do
+Toggle3:Set(true)
+Toggle4:Set(false)
+Toggle5:Set(false)
+Toggle6:Set(false)
+Toggle7:Set(false)
+Toggle8:Set(false)
+  local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs")
+
+if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty
+wait(3)
+Toggle2:Set(false)
+wait(1)
+  game:GetService("ReplicatedStorage").Events.Fight.Re_ChallengeStart:FireServer(1) 
+wait(3)
+  game:GetService("ReplicatedStorage").Events.Fight.Re_ChallengeStart:FireServer(7)
+wait(0.5)
+Toggle2:Set(true)
+end
+wait(1)
+end
+end)
+
+Toggle2:Callback(function(state2)
+  Toggle2:Set(false)
+  getfenv().autotest2 = (state2 and true or false)
+    while getfenv().autotest2 do
+    Toggle3:Set(true)
+Toggle4:Set(false)
+Toggle5:Set(false)
+Toggle6:Set(false)
+Toggle7:Set(false)
+    local npc = game.Workspace.FightNpcs:GetChildren()[1]
+        if npc then
+            local npcName = npc.Name
+
+            local args = {
+                [1] = npcName, 
+                [2] = 1,
+            }
+
+            game:GetService("ReplicatedStorage").Events.Fight.Re_TakeDamage:FireServer(unpack(args))
+  end
+wait(1)
+end
+end)
+
+Toggle3:Callback(function(state3)
+  Toggle3:Set(false)
+  getfenv().autotest3 = (state3 and true or false)
+    while getfenv().autotest3 do
+    
+  local fightNpcsFolder = workspace:FindFirstChild("FightNpcs")
+
+        if fightNpcsFolder then
+            for _, child in pairs(fightNpcsFolder:GetChildren()) do
+                local statusObject = child:FindFirstChild("AttackTime")
+
+                if statusObject then
+                    statusObject.Value = 900000000000 -- Set the AttackTime value to 900000
+                end
+            end
+        end
+wait(1)
+end
+end)
+
+
+Toggle4:Callback(function(state4)
+  Toggle4:Set(false)
+  getfenv().autotest4 = (state4 and true or false)
+    while getfenv().autotest4 do
+Toggle1:Set(false)
+Toggle2:Set(false)
+Toggle3:Set(true)
+Toggle5:Set(false)
+Toggle6:Set(false)
+Toggle7:Set(false)
+  local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs")
+
+if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty
+wait(6)
+  game:GetService("ReplicatedStorage").Events.Relics.Re_Start:FireServer("SecretBoss004")
+Toggle8:Set(true)
+end
+wait(1)
+end
+end)
+
+Toggle5:Callback(function(state5)
+  Toggle5:Set(false)
+  getfenv().autotest5 = (state5 and true or false)
+    while getfenv().autotest5 do
+Toggle1:Set(false)
+Toggle2:Set(false)
+Toggle3:Set(true)
+Toggle4:Set(false)
+Toggle6:Set(false)
+Toggle7:Set(false)
+  local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs")
+
+if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty
+wait(6)
+  game:GetService("ReplicatedStorage").Events.Relics.Re_Start:FireServer("SecretBoss003")
+Toggle8:Set(true)
+end
+wait(1)
+end
+end)
+
+Toggle6:Callback(function(state6)
+  Toggle6:Set(false)
+  getfenv().autotest6 = (state6 and true or false)
+    while getfenv().autotest6 do
+Toggle1:Set(false)
+Toggle2:Set(false)
+Toggle3:Set(true)
+Toggle5:Set(false)
+Toggle4:Set(false)
+Toggle7:Set(false)
+  local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs")
+
+if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty
+wait(6)
+  game:GetService("ReplicatedStorage").Events.Relics.Re_Start:FireServer("SecretBoss002")
+Toggle8:Set(true)
+end
+wait(1)
+end
+end)
+
+Toggle7:Callback(function(state7)
+  Toggle7:Set(false)
+  getfenv().autotest7 = (state7 and true or false)
+    while getfenv().autotest7 do
+Toggle1:Set(false)
+Toggle2:Set(false)
+Toggle3:Set(true)
+Toggle4:Set(false)
+Toggle5:Set(false)
+Toggle6:Set(false)
+  local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs")
+
+if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty
+wait(6)
+  game:GetService("ReplicatedStorage").Events.Relics.Re_Start:FireServer("SecretBoss001")
+Toggle8:Set(true)
+end
+wait(1)
+end
+end)
+
+Toggle8:Callback(function(state8)
+  Toggle8:Set(false)
+  getfenv().autotest8 = (state8 and true or false)
+    while getfenv().autotest8 do
+Toggle1:Set(false)
+Toggle2:Set(false)
+Toggle3:Set(true)
+  game:GetService("ReplicatedStorage").Events.Relics.Re_TakeDamage:FireServer(3)
+wait(1)
+end
+end)
+
+Toggle9:Callback(function(state9)
+  Toggle9:Set(false)
+  getfenv().autotest9 = (state9 and true or false)
+    while getfenv().autotest9 do
+Toggle1:Set(false)
+Toggle2:Set(false)
+Toggle3:Set(true)
+Toggle4:Set(false)
+Toggle5:Set(false)
+Toggle6:Set(false)
+Toggle7:Set(false)
+Toggle8:Set(false)
+Toggle10:Set(false)
+  local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs")
+
+if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty
+wait(6)
+  game:GetService("ReplicatedStorage").Events.Tower.Re_Challenge:FireServer(true)
+Toggle10:Set(true)
+end
+wait(1)
+end
+end)
+
+Toggle10:Callback(function(state10)
+  Toggle10:Set(false)
+  getfenv().autotest10 = (state10 and true or false)
+    while getfenv().autotest10 do
+game:GetService("ReplicatedStorage").Events.Tower.Re_TakeDamage:FireServer(3)
+wait(1)
+end
+end)
+
+local Dropdown = Tab2:AddDropdown({
+  Name = "🐣Hatcher World 1🐣",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Hatch 3 Egg", "Hatch 4 Egg", "Stop Hatch"},
+  Default = "Stop Hatch",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Hatch 1 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw001", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 2 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw002", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 3 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw003", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    
+if Value == "Hatch 4 Egg" then
+getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+    game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw004", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+end
+end
+end
+})
+
+  -- local link = "test" setclipboard(link)
+
+local Dropdown = Tab2:AddDropdown({
+  Name = "🐣Hatcher World 2🐣",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Hatch 3 Egg", "Hatch 4 Egg", "Stop Hatch"},
+  Default = "Stop Hatch",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Hatch 1 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw005", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 2 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw006", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 3 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw007", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    
+if Value == "Hatch 4 Egg" then
+getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+    game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw008", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+end
+end
+end
+})
+
+local Dropdown = Tab2:AddDropdown({
+  Name = "🐣Hatcher World 3🐣",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Hatch 3 Egg", "Hatch 4 Egg", "Stop Hatch"},
+  Default = "Stop Hatch",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Hatch 1 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw009", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 2 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw010", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 3 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw011", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    
+if Value == "Hatch 4 Egg" then
+getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+    game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw012", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+end
+end
+end
+})
+
+local Dropdown = Tab2:AddDropdown({
+  Name = "🐣Hatcher World 4🐣",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Hatch 3 Egg", "Hatch 4 Egg", "Stop Hatch"},
+  Default = "Stop Hatch",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Hatch 1 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw013", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 2 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw014", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 3 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw015", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    
+if Value == "Hatch 4 Egg" then
+getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+    game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw016", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+end
+end
+end
+})
+
+local Dropdown = Tab2:AddDropdown({
+  Name = "🐣Hatcher World 5🐣",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Hatch 3 Egg", "Hatch 4 Egg", "Stop Hatch"},
+  Default = "Stop Hatch",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Hatch 1 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw017", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 2 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw018", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 3 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw019", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    
+if Value == "Hatch 4 Egg" then
+getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+    game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw020", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+end
+end
+end
+})
+
+local Dropdown = Tab2:AddDropdown({
+  Name = "🐣Hatcher World 6🐣",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Hatch 1 Egg", "Hatch 2 Egg", "Stop Hatch"},
+  Default = "Stop Hatch",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Hatch 1 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw021", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+    if Value == "Hatch 2 Egg" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", "Draw022", {})
+    wait(1)
+  end
+   else
+if Value == "Stop Hatch" then
+  getfenv().Hatch = false
+  end
+  end
+end
+})
+
+local Dropdown = Tab5:AddDropdown({
+  Name = "💪Auto Training World 1💪",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"},
+  Default = "Stop Training",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Npc 1" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower001")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 2" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower002")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 3" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower003")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 4" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower004")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 5" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower005")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 6" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower006")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "VIP Npc 7" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower007")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  end
+})
+
+
+
+local Dropdown = Tab5:AddDropdown({
+  Name = "💪Auto Training World 2💪",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"},
+  Default = "Stop Training",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Npc 1" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower008")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 2" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower009")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 3" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower010")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 4" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower011")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 5" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower012")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 6" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower013")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "VIP Npc 7" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower014")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  end
+})
+
+
+
+local Dropdown = Tab5:AddDropdown({
+  Name = "💪Auto Training World 3💪",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"},
+  Default = "Stop Training",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Npc 1" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower015")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 2" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower016")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 3" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower017")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 4" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower018")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 5" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower019")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 6" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower020")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "VIP Npc 7" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower021")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  end
+})
+
+
+
+local Dropdown = Tab5:AddDropdown({
+  Name = "💪Auto Training World 4💪",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"},
+  Default = "Stop Training",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Npc 1" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower022")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 2" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower023")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 3" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower024")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 4" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower025")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 5" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower026")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 6" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower027")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "VIP Npc 7" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower028")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  end
+})
+
+
+
+local Dropdown = Tab5:AddDropdown({
+  Name = "💪Auto Training World 5💪",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"},
+  Default = "Stop Training",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Npc 1" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower029")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 2" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower030")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 3" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower031")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 4" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower032")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 5" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower033")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 6" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower034")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "VIP Npc 7" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower035")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  end
+})
+
+
+
+local Dropdown = Tab5:AddDropdown({
+  Name = "💪Auto Training World 6💪",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"},
+  Default = "Stop Training",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Npc 1" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower036")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 2" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower037")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 3" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower038")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 4" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower039")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 5" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower040")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 6" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower041")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "VIP Npc 7" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower042")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  end
+})
+
+
+
+local Dropdown = Tab5:AddDropdown({
+  Name = "💪Auto Training World 7💪",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = {"Npc 1", "Npc 2", "Npc 3", "Npc 4", "Npc 5", "Npc 6", "VIP Npc 7", "Stop Training"},
+  Default = "Stop Training",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == "Npc 1" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower043")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 2" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower044")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 3" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower045")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 4" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower046")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 5" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower047")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "Npc 6" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower048")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  if Value == "VIP Npc 7" then
+    getfenv().Hatch = (true or false)
+    while getfenv().Hatch do
+game:GetService("ReplicatedStorage").Events.Game.Re_TrainPower:FireServer("TrainPower049")
+    wait(1)
+  end
+   else
+if Value == "Stop Training" then
+  getfenv().Hatch = false
+  end
+  end
+  end
+})
