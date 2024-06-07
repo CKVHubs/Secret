@@ -1,4 +1,4 @@
-local Button = Tab4:AddButton({"Remove Textures", function()
+ Tab4:AddButton({"Remove Textures", function()
   local Dialog = Window:Dialog({
     Title = "Warning",
     Text = "Are you sure want remove textures :)?",
