@@ -411,7 +411,7 @@ Toggle4:Set(false)
 Toggle5:Set(false)
 Toggle6:Set(false)
 Toggle7:Set(false)
-Toggle8:Set(false)
+Toggle8:Set(true)
 Toggle10:Set(false)
   local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs")
 
