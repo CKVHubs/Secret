@@ -411,8 +411,8 @@ Toggle4:Set(false)
 Toggle5:Set(false)
 Toggle6:Set(false)
 Toggle7:Set(false)
-Toggle8:Set(true)
-Toggle10:Set(false)
+Toggle8:Set(false)
+Toggle10:Set(true)
   local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs")
 
 if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty
