@@ -1,0 +1,18 @@
+local Button = Tab4:AddButton({"Remove Textures", function()
+  local Dialog = Window:Dialog({
+    Title = "Warning",
+    Text = "Are you sure want remove textures :)?",
+    Options = {
+      {"Confirm", function()
+        for i,v in next, (workspace:GetDescendants()) do
+ if v:IsA("Part") then v.Material = Enum.Material.SmoothPlastic
+ end
+ end
+      end},
+     
+      {"Cancel", function()
+        
+      end}
+    }
+  })
+end})
