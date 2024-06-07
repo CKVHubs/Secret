@@ -134,6 +134,15 @@ end})
 local Section = Tab4:AddSection({"Themes"})
 local Paragraph = Tab4:AddParagraph({"Only this right now"})
 
+Tab4:AddButton({"Dark with Light Theme", function()
+  redzlib:SetTheme("Dark")
+end})
+
+Tab4:AddButton({"Dark Theme", function()
+  redzlib:SetTheme("Darker")
+end})
+
+
 local Button = Tab1:AddButton({
   Name = "Open / Close",
   Description = "Makes the Toggles Invisible"
