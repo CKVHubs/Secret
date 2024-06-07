@@ -1,18 +1,25 @@
- Tab4:AddButton({"Remov2e Textures", function()
-  local Dialog = Window:Dialog({
-    Title = "Warning",
-    Text = "Are you sure want remove textures :)?",
-    Options = {
-      {"Confirm", function()
-        for i,v in next, (workspace:GetDescendants()) do
- if v:IsA("Part") then v.Material = Enum.Material.SmoothPlastic
- end
- end
-      end},
-     
-      {"Cancel", function()
-        
-      end}
-    }
-  })
-end})
+local eggModelsFolder = game:GetService("ReplicatedStorage").Asserts.EggModels
+local eggModelNames = {}
+
+for _, model in ipairs(eggModelsFolder:GetChildren()) do
+  table.insert(eggModelNames, '' .. model.Name .. '')
+end
+
+local Dropdown = Tab1:AddDropdown({
+  Name = "🐣Hatcher🐣",
+  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
+  Options = eggModelNames,
+  Default = "Stop Hatch",
+  Flag = "dropdown teste",
+  Callback = function(Value)
+    if Value == (Value) then
+      getfenv().Hatch = true
+      while getfenv().Hatch do
+        game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", (Value), {})
+        wait(1)
+      end
+    elseif Value == "Stop Hatch" then
+      getfenv().Hatch = false
+    end
+  end
+})
