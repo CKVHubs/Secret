@@ -8,7 +8,7 @@ local allowedUsers = {
 }
 
 if table.find(allowedUsers, user) then
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/CKVHubs/Secret/main/LICENSE?token=GHSAT0AAAAAACTJ5HBZIYZAC3SIQT7PTVFQZTCIL5A"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/CKVHubs/Secret/main/LICENSE?token=GHSAT0AAAAAACTJ5HBYRLKK45NI6YQQIHWUZTCKEZQ"))()
 else
  print("You dont onwn the script")
 end
