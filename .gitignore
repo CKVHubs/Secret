@@ -10,5 +10,5 @@ local allowedUsers = {
 if table.find(allowedUsers, user) then
   loadstring(game:HttpGet("https://raw.githubusercontent.com/CKVHubs/Secret/main/LICENSE?token=GHSAT0AAAAAACTJ5HBYRLKK45NI6YQQIHWUZTCKEZQ"))()
 else
- print("You dont onwn the script")
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/CKVHubs/Secret/main/LICENSE?token=https://raw.githubusercontent.com/CKVHubs/Secret/main/Hub"))()
 end
