@@ -404,21 +404,10 @@ Toggle9:Callback(function(state9)
   Toggle9:Set(false)
   getfenv().autotest9 = (state9 and true or false)
     while getfenv().autotest9 do
-Toggle1:Set(false)
-Toggle2:Set(false)
-Toggle3:Set(true)
-Toggle4:Set(false)
-Toggle5:Set(false)
-Toggle6:Set(false)
-Toggle7:Set(false)
-Toggle8:Set(false)
-Toggle10:Set(true)
-  local fightNpcsFolder = game.workspace:FindFirstChild("FightNpcs")
-
-if fightNpcsFolder and #fightNpcsFolder:GetChildren() == 0 then -- Check if FightNpcs folder exists and is empty
-wait(6)
-  game:GetService("ReplicatedStorage").Events.Tower.Re_Challenge:FireServer(true)
-Toggle10:Set(true)
+local player = game.Players.LocalPlayer.Character.HumanoidRootPart
+local location = game.workspace.TowerTeleport.Next
+if location then
+player.CFrame = location.CFrame
 end
 wait(1)
 end
