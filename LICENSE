@@ -77,7 +77,20 @@ end)
 local Section = Tab2:AddSection({"Tower🏯"})
 local Paragraph = Tab2:AddParagraph({"⚠️DON'T CLICK FAST AND WAIT COOLDOWN⚠️"})
 
+local Toggle9 = Tab2:AddToggle({
+  Name = "⚔Attack⚔",
+  Description = " <font color='rgb(0,255,0)'>ALL GOOD</font> Not there bugs✅",
+  Default = false
+})
 
+Toggle9:Callback(function(state9)
+  Toggle9:Set(false)
+  getfenv().autotest9 = (state9 and true or false)
+    while getfenv().autotest3 do
+    game:GetService("ReplicatedStorage").Events.Tower.Re_TakeDamage:FireServer(3)
+wait(0.5)
+end
+end)
 
 local Section = Tab2:AddSection({"Secret Boss❓❓❓"})
 local Paragraph = Tab2:AddParagraph({"⚠️DON'T CLICK FAST AND WAIT COOLDOWN⚠️"})
@@ -255,4 +268,3 @@ local Button = Tab4:AddButton({"Dont get kick after 20 minutes(antiafk)", functi
     v:Disable()
 end
 end})
-
