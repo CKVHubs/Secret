@@ -31,9 +31,7 @@ local Toggle3 = Tab2:AddToggle({
   Default = false
 })
 
-Button:Callback(Toggle1.Visible)
-Button:Callback(Toggle2.Visible)
-Button:Callback(Toggle3.Visible)
+
 
 Toggle1:Callback(function(state2)
   Toggle1:Set(false)
