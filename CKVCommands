@@ -1,0 +1,201 @@
+local Players = game:GetService("Players")
+
+local function viewPlayer(playerName)
+  -- Improved player matching using string patterns
+  local foundPlayers = {}
+  for _, player in pairs(Players:GetPlayers()) do
+    if string.lower(player.Name):find("^" .. string.lower(playerName) .. ".*") then -- Match beginning and any characters, case-insensitive
+      foundPlayers[#foundPlayers + 1] = player
+    end
+  end
+
+  if #foundPlayers == 0 then
+    print("Player not found: " .. playerName)
+  elseif #foundPlayers == 1 then
+    -- View the single matching player
+    local player = foundPlayers[1]
+    workspace.CurrentCamera.CameraSubject = player.Character
+    player.Character.Humanoid.CameraMode = Enum.CameraMode.LockFirstPerson -- (Optional)
+  else
+    -- Multiple players matched, prompt for disambiguation
+    local choices = {}
+    for i, player in ipairs(foundPlayers) do
+      choices[i] = player.Name
+    end
+    local selectedIndex = game:GetService("UserInputService"):PromptSelection({
+      Title = "Multiple players found!",
+      Description = "Select the player you want to view:",
+      Options = choices,
+    })
+    if selectedIndex then
+      local player = foundPlayers[selectedIndex]
+      workspace.CurrentCamera.CameraSubject = player.Character
+      player.Character.Humanoid.CameraMode = Enum.CameraMode.LockFirstPerson -- (Optional)
+    end
+  end
+end
+
+local function unviewPlayer()
+  workspace.CurrentCamera.CameraSubject = Players.LocalPlayer.Character
+  if Players.LocalPlayer.Character then -- Check if local player's character exists
+    Players.LocalPlayer.Character.Humanoid.CameraMode = Enum.CameraMode.FreeExplore -- Reset camera mode (Optional)
+  end
+end
+
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
+  local message = messageData.Message
+  if string.sub(message, 1, 6) == "/view " then
+    local playerName = string.sub(message, 7)
+    viewPlayer(playerName)
+  elseif message == "/unview" then
+    unviewPlayer()
+  end
+end)
+
+-- ///////////////////////////////////// THE NEXT IS RESET CHARACTER
+
+-- Listen for new players
+game.Players.PlayerAdded:Connect(function(player)
+  -- Chat message listener for the new player
+  player.Chatted:Connect(function(message)
+    if message:lower() == "/re" then
+      player.Character:BreakJoints()
+    end
+  end)
+end)
+
+-- Check existing players at script start
+for _, player in pairs(game.Players:GetPlayers()) do
+  -- Chat message listener for existing players
+  player.Chatted:Connect(function(message)
+    if message:lower() == "/re" then
+      player.Character:BreakJoints()
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS WALKSPEED
+
+game.Players.PlayerAdded:Connect(function(player)
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/speed" then
+      local speed = tonumber(parts[2])
+      if speed then
+        player.Character.Humanoid.WalkSpeed = speed
+      end
+    elseif parts[1]:lower() == "/unspeed" then
+      player.Character.Humanoid.WalkSpeed = 16
+    end
+  end)
+end)
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/speed" then
+      local speed = tonumber(parts[2])
+      if speed then
+        player.Character.Humanoid.WalkSpeed = speed
+      end
+    elseif parts[1]:lower() == "/unspeed" then
+      player.Character.Humanoid.WalkSpeed = 16
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS JUMPPOWER
+
+game.Players.PlayerAdded:Connect(function(player)
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/jump" then
+      local jumppower = tonumber(parts[2])
+      if jumppower then
+        player.Character.Humanoid.JumpPower = jumppower
+      end
+    elseif parts[1]:lower() == "/unjump" then
+      player.Character.Humanoid.JumpPower = 50
+    end
+  end)
+end)
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/jump" then
+      local jumppower = tonumber(parts[2])
+      if jumppower then
+        player.Character.Humanoid.JumpPower = jumppower
+      end
+    elseif parts[1]:lower() == "/unjump" then
+      player.Character.Humanoid.JumpPower = 50
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS ZOOM MAX
+
+game.Players.PlayerAdded:Connect(function(player)
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/zoom" then
+      local zoom = tonumber(parts[2])
+      if zoom then
+        player.CameraMaxZoomDistance = zoom
+      end
+    elseif parts[1]:lower() == "/unzoom" then
+      player.CameraMaxZoomDistance = 12
+    end
+  end)
+end)
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/zoom" then
+      local zoom = tonumber(parts[2])
+      if zoom then
+        player.CameraMaxZoomDistance = zoom
+      end
+    elseif parts[1]:lower() == "/unzoom" then
+      player.CameraMaxZoomDistance = 12
+    end
+  end)
+end
+
+
+game.Players.PlayerAdded:Connect(function(player)
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/unzoom" then
+      player.CameraMaxZoomDistance = 12
+    end
+  end)
+end)
+
+-- ///////////////////////////////////// THE NEXT IS REMOVE TEXTURES
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/gfx" then
+      game.Lighting.Brightness = 0
+      game.Lighting.Ambient = Color3.fromRGB(0, 0, 0)
+      game.Lighting.GlobalShadows = false
+      game.Lighting.FogEnd = 100000
+      game.Lighting.FogColor = Color3.fromRGB(255, 255, 255)
+
+      for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+          part.Material = Enum.Material.SmoothPlastic
+        elseif part:IsA("Decal") then
+          part:Destroy()
+        end
+      end
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS MAKE FRAME BLACK
+
