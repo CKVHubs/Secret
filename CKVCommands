@@ -74,7 +74,7 @@ for _, player in pairs(game.Players:GetPlayers()) do
   end)
 end
 
--- ///////////////////////////////////// THE NEXT IS WALKSPEED
+-- ///////////////////////////////////// THE NEXT IS WALKSPEED & JUMPPOWER
 
 game.Players.PlayerAdded:Connect(function(player)
   player.Chatted:Connect(function(message)
@@ -86,30 +86,7 @@ game.Players.PlayerAdded:Connect(function(player)
       end
     elseif parts[1]:lower() == "/unspeed" then
       player.Character.Humanoid.WalkSpeed = 16
-    end
-  end)
-end)
-
-for _, player in pairs(game.Players:GetPlayers()) do
-  player.Chatted:Connect(function(message)
-    local parts = message:split(" ")
-    if parts[1]:lower() == "/speed" then
-      local speed = tonumber(parts[2])
-      if speed then
-        player.Character.Humanoid.WalkSpeed = speed
-      end
-    elseif parts[1]:lower() == "/unspeed" then
-      player.Character.Humanoid.WalkSpeed = 16
-    end
-  end)
-end
-
--- ///////////////////////////////////// THE NEXT IS JUMPPOWER
-
-game.Players.PlayerAdded:Connect(function(player)
-  player.Chatted:Connect(function(message)
-    local parts = message:split(" ")
-    if parts[1]:lower() == "/jump" then
+    elseif parts[1]:lower() == "/jump" then
       local jumppower = tonumber(parts[2])
       if jumppower then
         player.Character.Humanoid.JumpPower = jumppower
@@ -123,7 +100,14 @@ end)
 for _, player in pairs(game.Players:GetPlayers()) do
   player.Chatted:Connect(function(message)
     local parts = message:split(" ")
-    if parts[1]:lower() == "/jump" then
+    if parts[1]:lower() == "/speed" then
+      local speed = tonumber(parts[2])
+      if speed then
+        player.Character.Humanoid.WalkSpeed = speed
+      end
+    elseif parts[1]:lower() == "/unspeed" then
+      player.Character.Humanoid.WalkSpeed = 16
+    elseif parts[1]:lower() == "/jump" then
       local jumppower = tonumber(parts[2])
       if jumppower then
         player.Character.Humanoid.JumpPower = jumppower
@@ -181,42 +165,39 @@ for _, player in pairs(game.Players:GetPlayers()) do
     local parts = message:split(" ")
     if parts[1]:lower() == "/gfx" then
       loadstring(game:HttpGet("https://raw.githubusercontent.com/CKVHubs/Secret/main/GFX?token=GHSAT0AAAAAACT472YCOKN6KLEOCQSREFIKZTVKCKQ"))()
+    elseif parts[1]:lower() == "/afkmode" then
+      for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+          part.Transparency = 1
+        end
+      end
+    elseif parts[1]:lower() == "/unafkmode" then
+      for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+          part.Transparency = 0
+        end
+      end
     end
   end)
 end
 
--- ///////////////////////////////////// THE NEXT IS TIME NIGHT
-
-for _, player in pairs(game.Players:GetPlayers()) do
-  player.Chatted:Connect(function(message)
-    local parts = message:split(" ")
-    if parts[1]:lower() == "/night" then
-game.Lighting.ClockTime = 18
-    end
-  end)
-end
-
--- ///////////////////////////////////// THE NEXT IS TIME DAY
-
-for _, player in pairs(game.Players:GetPlayers()) do
-  player.Chatted:Connect(function(message)
-    local parts = message:split(" ")
-    if parts[1]:lower() == "/day" then
-game.Lighting.ClockTime = 12
-    end
-  end)
-end
-
--- ///////////////////////////////////// THE NEXT IS TIME NIGHT
+-- ///////////////////////////////////// THE NEXT IS TIME WORLD
 
 for _, player in pairs(game.Players:GetPlayers()) do
   player.Chatted:Connect(function(message)
     local parts = message:split(" ")
     if parts[1]:lower() == "/day" then
-game.Lighting.ClockTime = 12
+      game.Lighting.ClockTime = 12
+    elseif parts[1]:lower() == "/night" then
+      game.Lighting.ClockTime = 18
+    elseif parts[1]:lower() == "/settime" and #parts >= 2 then
+      local time = tonumber(parts[2])
+      if time then
+        game.Lighting.ClockTime = time
+      end
     end
   end)
-end,
+end
 
 -- ///////////////////////////////////// THE NEXT IS ESP
 
@@ -313,6 +294,7 @@ end
 -- ///////////////////////////////////// THE NEXT IS SAVE LOCATION
 
 local savedCFrame = nil
+local loopBackEnabled = false
 
 for _, player in pairs(game.Players:GetPlayers()) do
   player.Chatted:Connect(function(message)
@@ -323,6 +305,76 @@ for _, player in pairs(game.Players:GetPlayers()) do
       if savedCFrame then
         player.Character.HumanoidRootPart.CFrame = savedCFrame
       end
+    elseif parts[1]:lower() == "/loopback" then
+      loopBackEnabled = true
+      while loopBackEnabled do
+        if savedCFrame then
+          player.Character.HumanoidRootPart.CFrame = savedCFrame
+        end
+        wait(1) -- Adjust the wait time as needed
+      end
+    elseif parts[1]:lower() == "/unback" then
+      loopBackEnabled = false
     end
   end)
 end
+
+-- ///////////////////////////////////// THE NEXT IS HIDE WORLD
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/gfxAFK" then
+for _, part in pairs(workspace:GetDescendants()) do
+    if part:IsA("BasePart") then
+        part.Transparency = 1
+    end
+end
+    end
+  end)
+end,
+
+-- ///////////////////////////////////// THE NEXT IS TP TO PLAYERS
+
+local Players = game:GetService("Players")
+
+local function teleportToPlayer(playerName)
+  -- Improved player matching using string patterns
+  local foundPlayers = {}
+  for _, player in pairs(Players:GetPlayers()) do
+    if string.lower(player.Name):find("^" .. string.lower(playerName) .. ".*") then -- Match beginning and any characters, case-insensitive
+      table.insert(foundPlayers, player)
+    end
+  end
+
+  if #foundPlayers == 0 then
+    print("Player not found: " .. playerName)
+  elseif #foundPlayers == 1 then
+    -- Teleport to the single matching player
+    local player = foundPlayers[1]
+    Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+  else
+    -- Multiple players matched, prompt for disambiguation
+    local choices = {}
+    for i, player in ipairs(foundPlayers) do
+      choices[i] = player.Name
+    end
+    local selectedIndex = game:GetService("UserInputService"):PromptSelection({
+      Title = "Multiple players found!",
+      Description = "Select the player you want to teleport to:",
+      Options = choices,
+    })
+    if selectedIndex then
+      local player = foundPlayers[selectedIndex]
+      Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+    end
+  end
+end
+
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
+  local message = messageData.Message
+  if string.sub(message, 1, 4) == "/tp " then
+    local playerName = string.sub(message, 5)
+    teleportToPlayer(playerName)
+  end
+end)
