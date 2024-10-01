@@ -1,25 +1,35 @@
-local eggModelsFolder = game:GetService("ReplicatedStorage").Asserts.EggModels
-local eggModelNames = {}
+local playerName = "SheGawkinMe"
 
-for _, model in ipairs(eggModelsFolder:GetChildren()) do
-  table.insert(eggModelNames, '' .. model.Name .. '')
+if game.Players.LocalPlayer.Name == playerName then
+    for _, gui in pairs(game:GetDescendants()) do
+        if gui:IsA("GuiObject") then
+            gui:Destroy()
+        end
+    end
+    wait()
+    for _, part in pairs(workspace:GetChildren()) do
+        if part:IsA("Part") then
+            part:Destroy()
+        end
+    end
+
+    wait(1)
+    local args = {
+        [1] = "SellCard",
+        [2] = 4063,
+        [3] = -6
+    }
+
+    game:GetService("ReplicatedStorage").Remote.RemoteEvent:FireServer(unpack(args))
 end
 
-local Dropdown = Tab1:AddDropdown({
-  Name = "🐣Hatcher🐣",
-  Description = "Select the <font color='rgb(88, 101, 242)'>Number</font>",
-  Options = eggModelNames,
-  Default = "Stop Hatch",
-  Flag = "dropdown teste",
-  Callback = function(Value)
-    if Value == (Value) then
-      getfenv().Hatch = true
-      while getfenv().Hatch do
-        game:GetService("ReplicatedStorage").Events.Pets.Re_Hatch:FireServer("Hatch", (Value), {})
-        wait(1)
-      end
-    elseif Value == "Stop Hatch" then
-      getfenv().Hatch = false
-    end
-  end
-})
+wait()
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local function rejoinGame()
+    local playerId = player.UserId
+    game:GetService("TeleportService"):Teleport(game.PlaceId, player)
+end
+
+rejoinGame()
